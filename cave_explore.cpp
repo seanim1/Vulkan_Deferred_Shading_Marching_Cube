@@ -1,22 +1,5 @@
 /*
-* Vulkan Example - Indirect drawing
-*
-* Copyright (C) 2016-2023 by Sascha Willems - www.saschawillems.de
-*
-* This code is licensed under the MIT license (MIT) (http://opensource.org/licenses/MIT)
-*
-* Summary:
-* Use a device local buffer that stores draw commands for instanced rendering of different meshes stored
-* in the same buffer.
-*
-* Indirect drawing offloads draw command generation and offers the ability to update them on the GPU
-* without the CPU having to touch the buffer again, also reducing the number of drawcalls.
-*
-* The example shows how to setup and fill such a buffer on the CPU side, stages it to the device and
-* shows how to render it using only one draw command.
-*
-* See readme.md for details
-*
+* Based on Sascha Willems's Vulkan repo
 */
 
 #include "vulkanexamplebase.h"
