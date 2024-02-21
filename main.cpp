@@ -1164,7 +1164,9 @@ public:
 			chunkListBuffer[chunkIndex]->vertices_per_chunk.count = static_cast<uint32_t>(chunkListBuffer[chunkIndex]->vertexBuffer_per_chunk.size());
 			uint32_t vertexBufferSize = chunkListBuffer[chunkIndex]->vertices_per_chunk.count * sizeof(Vertex);
 
-			// VRAM (Staging) approach (lowest: 1200 fps, avg: 1400 fps?): VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+			vkDestroyBuffer(vulkanDevice->logicalDevice, chunkListBuffer[chunkIndex]->vertices_per_chunk.buffer, nullptr);
+			vkFreeMemory(vulkanDevice->logicalDevice, chunkListBuffer[chunkIndex]->vertices_per_chunk.memory, nullptr);
+			// VRAM (Staging) approach: VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
 			//struct StagingBuffer {
 			//	VkBuffer buffer;
 			//	VkDeviceMemory memory;
@@ -1191,7 +1193,7 @@ public:
 			//vkDestroyBuffer(vulkanDevice->logicalDevice, vertexStaging.buffer, nullptr);
 			//vkFreeMemory(vulkanDevice->logicalDevice, vertexStaging.memory, nullptr);
 
-			// RAM approach: (lowest: 900 fps: avg: 1000): VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
+			// RAM approach: VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
 			//VK_CHECK_RESULT(vulkanDevice->createBuffer(
 			//	VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
 			//	VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
@@ -1200,7 +1202,7 @@ public:
 			//	&chunkListBuffer[chunkIndex]->vertices_per_chunk.memory,
 			//	chunkListBuffer[chunkIndex]->vertexBuffer_per_chunk.data()));
 
-			// VRAM (Resizeable BAR) approach: (lowest: 1200 fps, avg: 1400 fps):  VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
+			// VRAM (Resizeable BAR) approach: VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
 			VK_CHECK_RESULT(vulkanDevice->createBuffer(
 				VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
 				VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,

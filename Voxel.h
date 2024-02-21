@@ -25,6 +25,8 @@ struct Vertices {
     int count;
     VkBuffer buffer;
     VkDeviceMemory memory;
+    // Store the mapped address of the particle data for reuse
+    //void* mappedMemory;
 };
 
 struct Chunk {
