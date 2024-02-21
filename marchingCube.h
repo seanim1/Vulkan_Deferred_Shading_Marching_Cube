@@ -1,9 +1,6 @@
 #pragma once
 #include "vulkanexamplebase.h"
-#define PLANET_DIMENSION 4
-#define CHUNK_DIMENSION 16
-#define CHUNK_PADDED_DIMENSION (CHUNK_DIMENSION + 1)
-#define CHUNK_COUNT (PLANET_DIMENSION * PLANET_DIMENSION * PLANET_DIMENSION)
+
 // https://paulbourke.net/geometry/polygonise/
 namespace MarchingCube
 {
